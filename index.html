@@ -3,13 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Learning Portal — Master Modern Web Development</title>
-  <meta name="description" content="Structured, production-ready courses for developers. Browse Angular, React, and more — hands-on lessons, quizzes, and progress tracking." />
+  <title>Learning Portal — Self-paced courses from Python to AI</title>
+  <meta name="description" content="Self-paced courses for curious people: Python, SQL, web, cloud, security, AI and more. Lessons with quizzes, learning paths, and no account needed." />
   <meta name="color-scheme" content="dark light" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-  <link rel="mask-icon" href="favicon.svg" color="#8b7bff" />
-  <meta name="theme-color" content="#f7f8fc" media="(prefers-color-scheme: light)" />
-  <meta name="theme-color" content="#07080d" media="(prefers-color-scheme: dark)" />
+  <link rel="mask-icon" href="favicon.svg" color="#1a1916" />
+  <meta name="theme-color" content="#f6f4ee" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0f0f12" media="(prefers-color-scheme: dark)" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <!-- Display font loads without blocking the page; headings fall back to Georgia until it arrives. -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500..700;1,9..144,500..700&display=swap" media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500..700;1,9..144,500..700&display=swap" /></noscript>
 
   <!-- Set theme before first paint to avoid a flash of the wrong theme -->
   <script>
@@ -27,68 +33,72 @@
   <style>
     /* ============================================================
        DESIGN TOKENS
+       The UI itself stays quiet (ink on paper); the courses' own
+       brand colors are the only loud color on the page.
        ============================================================ */
     :root {
       --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
         Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
+      --font-display: "Fraunces", ui-serif, Georgia, "Times New Roman", serif;
       --font-mono: ui-monospace, "SF Mono", "Cascadia Code", "JetBrains Mono",
         Menlo, Consolas, monospace;
 
       --maxw: 1200px;
-      --radius: 18px;
+      --gutter: 24px;
+      --header-h: 64px;
+      --radius: 16px;
       --radius-sm: 12px;
       --radius-pill: 999px;
+
+      /* the four brand-mark colors, reused for the headline underline */
+      --c1: #e5484d; --c2: #f5a524; --c3: #30a46c; --c4: #3e63dd;
 
       --ease: cubic-bezier(0.22, 1, 0.36, 1);
     }
 
-    /* Dark theme (default / developer-first) */
     :root[data-theme="dark"] {
-      --bg: #07080d;
-      --bg-2: #0a0c14;
-      --surface: rgba(255, 255, 255, 0.024);
-      --surface-2: rgba(255, 255, 255, 0.04);
-      --surface-hover: rgba(255, 255, 255, 0.055);
-      --border: rgba(255, 255, 255, 0.08);
-      --border-strong: rgba(255, 255, 255, 0.16);
-      --text: #f2f4f8;
-      --text-muted: #a2acbd;
-      --text-faint: #6b7688;
-      --accent: #8b7bff;
-      --accent-2: #22d3ee;
-      --accent-fg: #ffffff;
-      --ring: #8b7bff;
-      --grid-line: rgba(255, 255, 255, 0.05);
-      --shadow: 0 24px 60px -18px rgba(0, 0, 0, 0.75);
-      --chip-bg: rgba(255, 255, 255, 0.045);
+      --bg: #0f0f12;
+      --bg-2: #18181d;
+      --surface: #16161b;
+      --surface-2: #1d1d23;
+      --surface-hover: #1c1c22;
+      --border: rgba(255, 255, 255, 0.085);
+      --border-strong: rgba(255, 255, 255, 0.17);
+      --text: #f3f1ec;
+      --text-muted: #aeacb5;
+      --text-faint: #8a8892;
+      --accent: #f3f1ec;
+      --accent-fg: #0f0f12;
+      --ring: #8ab4ff;
+      --shadow: 0 22px 44px -20px rgba(0, 0, 0, 0.8);
+      --chip-bg: rgba(255, 255, 255, 0.055);
+      --lvl-beginner: #4ade80; --lvl-intermediate: #fbbf24; --lvl-advanced: #fb7185;
     }
 
-    /* Light theme */
     :root[data-theme="light"] {
-      --bg: #f7f8fc;
-      --bg-2: #eef1f8;
-      --surface: #ffffff;
+      --bg: #f6f4ee;
+      --bg-2: #fffdf8;
+      --surface: #fffdf8;
       --surface-2: #ffffff;
       --surface-hover: #ffffff;
-      --border: rgba(15, 23, 42, 0.09);
-      --border-strong: rgba(15, 23, 42, 0.18);
-      --text: #0d1220;
-      --text-muted: #55617a;
-      --text-faint: #8a94a8;
-      --accent: #5b4bff;
-      --accent-2: #0891b2;
-      --accent-fg: #ffffff;
-      --ring: #5b4bff;
-      --grid-line: rgba(15, 23, 42, 0.055);
-      --shadow: 0 20px 48px -20px rgba(24, 33, 77, 0.28);
-      --chip-bg: rgba(15, 23, 42, 0.035);
+      --border: rgba(26, 25, 22, 0.1);
+      --border-strong: rgba(26, 25, 22, 0.2);
+      --text: #1a1916;
+      --text-muted: #57544c;
+      --text-faint: #736f66;
+      --accent: #1a1916;
+      --accent-fg: #fffdf8;
+      --ring: #2f6fed;
+      --shadow: 0 22px 44px -24px rgba(48, 38, 18, 0.32);
+      --chip-bg: rgba(26, 25, 22, 0.05);
+      --lvl-beginner: #15803d; --lvl-intermediate: #b45309; --lvl-advanced: #be123c;
     }
 
     /* ============================================================
        BASE
        ============================================================ */
     * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; scroll-padding-top: calc(var(--header-h) + 16px); }
 
     body {
       margin: 0;
@@ -104,9 +114,9 @@
 
     a { color: inherit; }
     img { max-width: 100%; display: block; }
-    button { font-family: inherit; }
+    button, input { font-family: inherit; }
 
-    ::selection { background: color-mix(in srgb, var(--accent) 40%, transparent); }
+    ::selection { background: color-mix(in srgb, var(--c2) 45%, transparent); }
 
     :focus-visible {
       outline: 2px solid var(--ring);
@@ -118,7 +128,13 @@
       width: 100%;
       max-width: var(--maxw);
       margin: 0 auto;
-      padding: 0 24px;
+      padding: 0 var(--gutter);
+    }
+    @media (max-width: 560px) { :root { --gutter: 16px; } }
+
+    .sr-only {
+      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
     }
 
     .skip-link {
@@ -137,44 +153,6 @@
     .skip-link:focus { top: 12px; }
 
     /* ============================================================
-       BACKGROUND DECOR
-       ============================================================ */
-    .bg-decor {
-      position: fixed;
-      inset: 0;
-      z-index: -1;
-      overflow: hidden;
-      pointer-events: none;
-    }
-    .bg-decor::before {
-      /* subtle grid, fading out toward the bottom */
-      content: "";
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(var(--grid-line) 1px, transparent 1px),
-        linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
-      background-size: 64px 64px;
-      -webkit-mask-image: radial-gradient(ellipse 90% 55% at 50% 0%, #000 10%, transparent 75%);
-              mask-image: radial-gradient(ellipse 90% 55% at 50% 0%, #000 10%, transparent 75%);
-    }
-    .blob {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(90px);
-      opacity: 0.55;
-    }
-    .blob.b1 { width: 620px; height: 620px; top: -260px; left: -140px;
-      background: radial-gradient(circle, var(--accent), transparent 68%); }
-    .blob.b2 { width: 560px; height: 560px; top: -180px; right: -160px;
-      background: radial-gradient(circle, var(--accent-2), transparent 66%); opacity: 0.4; }
-    .blob.b3 { width: 500px; height: 500px; top: 620px; left: 40%;
-      background: radial-gradient(circle, #dd0031, transparent 70%); opacity: 0.14; }
-    :root[data-theme="light"] .blob { opacity: 0.32; }
-    :root[data-theme="light"] .blob.b2 { opacity: 0.26; }
-    :root[data-theme="light"] .blob.b3 { opacity: 0.1; }
-
-    /* ============================================================
        HEADER
        ============================================================ */
     .site-header {
@@ -183,16 +161,16 @@
       z-index: 50;
       backdrop-filter: saturate(150%) blur(14px);
       -webkit-backdrop-filter: saturate(150%) blur(14px);
-      background: color-mix(in srgb, var(--bg) 72%, transparent);
+      background: color-mix(in srgb, var(--bg) 82%, transparent);
       border-bottom: 1px solid transparent;
-      transition: border-color 0.3s var(--ease), background 0.3s var(--ease);
+      transition: border-color 0.3s var(--ease);
     }
     .site-header.scrolled { border-bottom-color: var(--border); }
     .header-inner {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      height: 66px;
+      height: var(--header-h);
     }
     .brand {
       display: inline-flex;
@@ -204,16 +182,19 @@
       text-decoration: none;
       color: var(--text);
     }
+    /* 2x2 mosaic: a tiny version of the hero */
     .brand-mark {
-      width: 34px; height: 34px;
-      border-radius: 10px;
-      display: grid; place-items: center;
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      color: #fff;
-      font-weight: 800;
-      box-shadow: 0 6px 18px -6px color-mix(in srgb, var(--accent) 70%, transparent);
+      width: 28px; height: 28px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3px;
+      flex: none;
     }
-    .brand-mark svg { width: 19px; height: 19px; }
+    .brand-mark i { border-radius: 4px; }
+    .brand-mark i:nth-child(1) { background: var(--c1); }
+    .brand-mark i:nth-child(2) { background: var(--c2); }
+    .brand-mark i:nth-child(3) { background: var(--c4); }
+    .brand-mark i:nth-child(4) { background: var(--c3); }
     .header-actions { display: flex; align-items: center; gap: 8px; }
     .icon-btn {
       width: 40px; height: 40px;
@@ -270,9 +251,9 @@
       width: 40px; height: 40px; padding: 0;
       display: grid; place-items: center; overflow: hidden;
       border-radius: 50%;
-      border: 2px solid color-mix(in srgb, var(--accent) 45%, transparent);
-      background: color-mix(in srgb, var(--accent) 16%, transparent);
-      color: var(--accent);
+      border: 2px solid var(--border-strong);
+      background: var(--chip-bg);
+      color: var(--text);
       font-weight: 800; font-size: 0.95rem;
       cursor: pointer;
       transition: border-color 0.18s var(--ease);
@@ -306,11 +287,12 @@
       color: var(--text);
       box-shadow: var(--shadow);
     }
-    dialog.signin::backdrop { background: rgba(3, 4, 10, 0.66); backdrop-filter: blur(4px); }
+    dialog.signin::backdrop { background: rgba(8, 7, 5, 0.6); backdrop-filter: blur(4px); }
     dialog.signin[open] { animation: rise 0.35s var(--ease) both; }
     .signin-body { padding: 28px; }
     .signin-top { display: flex; align-items: flex-start; justify-content: space-between; }
-    .signin h2 { margin: 16px 0 8px; font-size: 1.45rem; line-height: 1.2; letter-spacing: -0.02em; }
+    .signin .brand-mark { width: 34px; height: 34px; }
+    .signin h2 { margin: 16px 0 8px; font-family: var(--font-display); font-weight: 600; font-size: 1.6rem; line-height: 1.15; letter-spacing: -0.01em; }
     .signin-desc { margin: 0; color: var(--text-muted); font-size: 0.92rem; line-height: 1.55; }
     .signin-providers { display: grid; gap: 10px; margin-top: 22px; }
     .btn-provider {
@@ -327,7 +309,7 @@
     .btn-provider:hover:not(:disabled) { border-color: var(--accent); background: var(--surface-hover); }
     .btn-provider:disabled { opacity: 0.55; cursor: progress; }
     .btn-provider svg { width: 19px; height: 19px; }
-    .signin-error { margin-top: 14px; color: #fb7185; font-weight: 600; font-size: 0.88rem; }
+    .signin-error { margin-top: 14px; color: var(--lvl-advanced); font-weight: 600; font-size: 0.88rem; }
     .signin-error:empty { display: none; }
     .signin-fine { margin: 18px 0 0; font-size: 0.8rem; color: var(--text-faint); }
     .signin-later {
@@ -338,364 +320,453 @@
     .signin-later:hover { color: var(--text); background: var(--chip-bg); }
 
     /* ============================================================
+       COURSE TILE — the course's own color + logo. Used in the hero
+       mosaic, on cards and in learning paths.
+       ============================================================ */
+    .tile {
+      --s: 48px;
+      width: var(--s); height: var(--s);
+      flex: none;
+      display: grid; place-items: center;
+      border-radius: calc(var(--s) * 0.27);
+      background: linear-gradient(150deg, var(--theme), color-mix(in srgb, var(--theme) 64%, #000));
+      color: #fff;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), inset 0 -1px 0 rgba(0, 0, 0, 0.12);
+    }
+    .tile svg { width: 54%; height: 54%; display: block; filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.25)); }
+    .tile .mono { font-family: var(--font-mono); font-weight: 800; font-size: calc(var(--s) * 0.34); letter-spacing: -0.03em; }
+
+    /* ============================================================
        HERO
        ============================================================ */
-    .hero { padding: 84px 0 52px; text-align: center; }
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 6px 14px 6px 8px;
-      border-radius: var(--radius-pill);
-      border: 1px solid var(--border);
-      background: var(--surface);
-      font-size: 0.8rem; font-weight: 600;
-      color: var(--text-muted);
-      margin-bottom: 26px;
+    .hero { padding: 64px 0 72px; }
+    .hero-inner {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+      gap: 64px;
+      align-items: center;
     }
-    .hero-badge .dot {
-      width: 20px; height: 20px; border-radius: 50%;
-      display: grid; place-items: center;
-      background: color-mix(in srgb, var(--accent-2) 22%, transparent);
-      color: var(--accent-2); font-size: 0.7rem;
+    .eyebrow {
+      margin: 0 0 18px;
+      font-size: 0.8rem; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--text-muted);
     }
     .hero h1 {
-      font-size: clamp(2.4rem, 6vw, 4.1rem);
-      line-height: 1.04;
-      letter-spacing: -0.035em;
-      font-weight: 820;
-      margin: 0 auto 20px;
-      max-width: 15ch;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: clamp(2.6rem, 6.2vw, 4.6rem);
+      line-height: 1.02;
+      letter-spacing: -0.025em;
+      margin: 0 0 22px;
+      font-variation-settings: "opsz" 144;
     }
-    .hero h1 .grad {
-      background: linear-gradient(115deg, var(--accent) 10%, var(--accent-2) 90%);
-      -webkit-background-clip: text; background-clip: text;
-      -webkit-text-fill-color: transparent; color: transparent;
-    }
-    .hero p.lead {
-      font-size: clamp(1.05rem, 2vw, 1.25rem);
-      color: var(--text-muted);
-      max-width: 60ch;
-      margin: 0 auto 34px;
-    }
-    .hero-cta { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
-    .btn {
-      display: inline-flex; align-items: center; gap: 9px;
-      height: 52px; padding: 0 26px;
-      border-radius: 13px;
-      font-weight: 650; font-size: 1rem;
-      text-decoration: none; cursor: pointer;
-      border: 1px solid transparent;
-      transition: transform 0.18s var(--ease), box-shadow 0.2s var(--ease),
-        background 0.2s var(--ease), border-color 0.2s var(--ease);
-    }
-    .btn svg { width: 18px; height: 18px; }
-    .btn-primary {
-      background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent) 55%, var(--accent-2)));
-      color: var(--accent-fg);
-      box-shadow: 0 14px 30px -10px color-mix(in srgb, var(--accent) 65%, transparent);
-    }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 20px 40px -12px color-mix(in srgb, var(--accent) 70%, transparent); }
-    .btn-ghost { background: var(--surface); border-color: var(--border); color: var(--text); }
-    .btn-ghost:hover { border-color: var(--border-strong); background: var(--surface-hover); transform: translateY(-2px); }
-
-    /* Stats */
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-      max-width: 760px;
-      margin: 56px auto 0;
-    }
-    .stat {
-      padding: 22px 12px;
-      border-radius: var(--radius);
-      border: 1px solid var(--border);
-      background: var(--surface);
-      text-align: center;
-    }
-    .stat .num {
-      font-size: clamp(1.7rem, 3.6vw, 2.3rem);
-      font-weight: 800; letter-spacing: -0.02em;
-      line-height: 1;
-      background: linear-gradient(120deg, var(--text), var(--text-muted));
-      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
-    }
-    .stat .label {
-      margin-top: 8px;
-      font-size: 0.82rem; font-weight: 600;
-      color: var(--text-faint);
-      text-transform: uppercase; letter-spacing: 0.06em;
-    }
-    @media (max-width: 620px) { .stats { grid-template-columns: repeat(2, 1fr); } }
-
-    /* ============================================================
-       SECTION HEADINGS
-       ============================================================ */
-    section.block { padding: 60px 0 10px; }
-    .section-head { margin-bottom: 30px; }
-    .section-head .kicker {
-      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.09em;
-      text-transform: uppercase; color: var(--accent);
-    }
-    .section-head h2 {
-      font-size: clamp(1.6rem, 3.4vw, 2.2rem);
-      letter-spacing: -0.025em; font-weight: 780;
-      margin: 8px 0 6px;
-    }
-    .section-head p { color: var(--text-muted); margin: 0; max-width: 60ch; }
-
-    /* ============================================================
-       COURSE CARDS
-       ============================================================ */
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 22px;
-    }
-    @media (max-width: 980px) { .grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }
-
-    .card {
+    .hero h1 em {
+      font-style: italic;
+      font-weight: 500;
       position: relative;
-      display: flex;
-      flex-direction: column;
-      text-decoration: none;
-      color: inherit;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      overflow: hidden;
-      transition: transform 0.28s var(--ease), border-color 0.28s var(--ease), box-shadow 0.28s var(--ease);
-      will-change: transform;
+      white-space: nowrap;
     }
-    .card:not(.is-soon):hover {
-      transform: translateY(-6px);
-      border-color: color-mix(in srgb, var(--theme, var(--accent)) 55%, var(--border-strong));
-      box-shadow: var(--shadow), 0 0 0 1px color-mix(in srgb, var(--theme, var(--accent)) 30%, transparent),
-        0 30px 60px -24px color-mix(in srgb, var(--theme, var(--accent)) 45%, transparent);
-    }
-    .card:not(.is-soon):hover .cover::after { opacity: 1; }
-    .card.is-soon { opacity: 0.82; cursor: not-allowed; }
-
-    .cover {
-      position: relative;
-      height: 132px;
-      display: grid;
-      place-items: center;
-      overflow: hidden;
-      background:
-        radial-gradient(120% 120% at 80% -10%, color-mix(in srgb, var(--theme) 60%, transparent), transparent 60%),
-        linear-gradient(135deg, color-mix(in srgb, var(--theme) 85%, #000), color-mix(in srgb, var(--theme) 45%, #05060a));
-    }
-    .cover::before {
-      /* dotted texture */
+    .hero h1 em::after {
+      /* four-color underline, echoing the brand mark */
       content: "";
-      position: absolute; inset: 0;
-      background-image: radial-gradient(rgba(255,255,255,0.16) 1px, transparent 1.4px);
-      background-size: 18px 18px;
-      -webkit-mask-image: linear-gradient(180deg, #000, transparent);
-              mask-image: linear-gradient(180deg, #000, transparent);
-      opacity: 0.5;
+      position: absolute;
+      left: 0.04em; right: 0.02em; bottom: 0.02em;
+      height: 0.09em;
+      border-radius: 99px;
+      background: linear-gradient(90deg, var(--c1) 0 25%, var(--c2) 25% 50%, var(--c3) 50% 75%, var(--c4) 75% 100%);
+      transform-origin: left;
+      animation: draw 0.9s 0.45s var(--ease) both;
     }
-    .cover::after {
-      /* hover sheen */
-      content: "";
-      position: absolute; inset: 0;
-      background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.16) 50%, transparent 70%);
-      opacity: 0; transition: opacity 0.4s var(--ease);
-    }
-    .cover .mono {
-      position: relative;
-      font-family: var(--font-mono);
-      font-size: 3rem; font-weight: 800;
-      color: #fff;
-      text-shadow: 0 4px 20px rgba(0,0,0,0.4);
-      letter-spacing: -0.03em;
-    }
-    /* Real tech logo mark — monochrome, sits on the themed cover gradient */
-    .cover .logo {
-      position: relative;
-      width: 60px; height: 60px;
-      color: #fff;
-      filter: drop-shadow(0 4px 20px rgba(0,0,0,0.4));
-    }
-    .cover .logo svg { width: 100%; height: 100%; display: block; }
-    .cover-badges {
-      position: absolute; top: 12px; right: 12px;
-      display: flex; gap: 7px; flex-wrap: wrap; justify-content: flex-end;
-    }
-    .pill {
-      font-size: 0.68rem; font-weight: 700;
-      letter-spacing: 0.04em; text-transform: uppercase;
-      padding: 4px 9px; border-radius: var(--radius-pill);
-      backdrop-filter: blur(4px);
-    }
-    .pill-new { background: rgba(255,255,255,0.92); color: #0a0c14; }
-    .pill-soon { background: rgba(10,12,20,0.55); color: #fff; border: 1px solid rgba(255,255,255,0.35); }
-
-    .card-body { padding: 20px 20px 22px; display: flex; flex-direction: column; flex: 1; }
-    .card-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 11px; }
-    .cat {
-      font-size: 0.74rem; font-weight: 700;
-      color: var(--text-faint); text-transform: uppercase; letter-spacing: 0.05em;
-    }
-    .diff {
-      font-size: 0.72rem; font-weight: 700;
-      padding: 3px 9px; border-radius: var(--radius-pill);
-      margin-left: auto;
-    }
-    .diff-Beginner { background: color-mix(in srgb, #22c55e 20%, transparent); color: #4ade80; }
-    .diff-Intermediate { background: color-mix(in srgb, #f59e0b 22%, transparent); color: #fbbf24; }
-    .diff-Advanced { background: color-mix(in srgb, #f43f5e 22%, transparent); color: #fb7185; }
-    :root[data-theme="light"] .diff-Beginner { color: #15803d; }
-    :root[data-theme="light"] .diff-Intermediate { color: #b45309; }
-    :root[data-theme="light"] .diff-Advanced { color: #be123c; }
-
-    .card h3 { font-size: 1.28rem; font-weight: 740; letter-spacing: -0.02em; margin: 0 0 8px; }
-    .card .desc { color: var(--text-muted); font-size: 0.92rem; margin: 0 0 16px; flex: 1; }
-
-    .tech { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; }
-    .tech .chip {
-      font-size: 0.75rem; font-weight: 600;
-      padding: 4px 10px; border-radius: var(--radius-pill);
-      background: var(--chip-bg);
-      border: 1px solid var(--border);
+    @keyframes draw { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+    .lead {
+      font-size: clamp(1.05rem, 1.8vw, 1.2rem);
       color: var(--text-muted);
+      max-width: 50ch;
+      margin: 0 0 30px;
     }
-    .card-foot {
-      display: flex; align-items: center; justify-content: space-between;
-      padding-top: 15px; border-top: 1px solid var(--border);
-    }
-    .card-foot .info { display: inline-flex; align-items: center; gap: 6px; font-size: 0.82rem; color: var(--text-faint); font-weight: 500; }
-    .card-foot .info svg { width: 14px; height: 14px; }
-    .go {
-      display: inline-flex; align-items: center; gap: 5px;
-      font-size: 0.88rem; font-weight: 700;
-      color: color-mix(in srgb, var(--theme, var(--accent)) 78%, var(--text));
-      transition: gap 0.2s var(--ease);
-    }
-    .card:hover .go { gap: 9px; }
-    .go-soon { color: var(--text-faint); font-weight: 600; }
 
-    /* Featured variant */
-    .featured-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
-    @media (max-width: 760px) { .featured-grid { grid-template-columns: 1fr; } }
-    .card.featured .cover { height: 168px; }
-    .card.featured .cover .mono { font-size: 3.6rem; }
-    .card.featured .cover .logo { width: 74px; height: 74px; }
-
-    /* ============================================================
-       CATALOG CONTROLS  (search + category + tags)
-       ============================================================ */
-    .controls { margin-bottom: 30px; }
-    .search-wrap { position: relative; margin-bottom: 20px; }
-    .search-wrap svg {
+    /* Search */
+    .search { position: relative; max-width: 560px; }
+    .search > svg {
       position: absolute; left: 18px; top: 50%; transform: translateY(-50%);
-      width: 19px; height: 19px; color: var(--text-faint); pointer-events: none;
+      width: 20px; height: 20px; color: var(--text-faint); pointer-events: none;
     }
     #search {
-      width: 100%; height: 54px;
-      padding: 0 48px 0 50px;
+      width: 100%; height: 58px;
+      padding: 0 52px 0 52px;
       border-radius: 14px;
-      border: 1px solid var(--border);
-      background: var(--surface);
-      color: var(--text); font-size: 1rem;
+      border: 1px solid var(--border-strong);
+      background: var(--surface-2);
+      color: var(--text); font-size: 1.02rem;
+      box-shadow: 0 10px 30px -18px rgba(0, 0, 0, 0.35);
       transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease);
+      -webkit-appearance: none; appearance: none;
     }
+    #search::-webkit-search-cancel-button { display: none; }
     #search::placeholder { color: var(--text-faint); }
     #search:focus {
       outline: none;
       border-color: var(--accent);
-      box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 18%, transparent);
+      box-shadow: 0 0 0 4px color-mix(in srgb, var(--ring) 22%, transparent);
     }
+    .search-kbd {
+      position: absolute; right: 16px; top: 50%; transform: translateY(-50%);
+      min-width: 24px; height: 24px; padding: 0 6px;
+      display: grid; place-items: center;
+      border-radius: 6px;
+      border: 1px solid var(--border-strong);
+      font: 600 0.78rem var(--font-mono);
+      color: var(--text-faint);
+      pointer-events: none;
+    }
+    .search.has-value .search-kbd, #search:focus ~ .search-kbd { display: none; }
+    @media (hover: none) { .search-kbd { display: none; } }
     .search-clear {
       position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
-      width: 30px; height: 30px; border: none; border-radius: 8px;
+      width: 34px; height: 34px; border: none; border-radius: 9px;
       background: var(--chip-bg); color: var(--text-muted);
       cursor: pointer; display: none; place-items: center;
     }
-    .search-clear.show { display: grid; }
-    .search-clear svg { width: 14px; height: 14px; }
+    .search.has-value .search-clear { display: grid; }
+    .search-clear:hover { color: var(--text); }
+    .search-clear svg { width: 15px; height: 15px; }
 
-    .filter-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 14px; }
-    .filter-label {
-      font-size: 0.76rem; font-weight: 700; text-transform: uppercase;
-      letter-spacing: 0.06em; color: var(--text-faint); margin-right: 4px;
+    .suggest {
+      display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
+      margin-top: 14px;
     }
+    .suggest-label { font-size: 0.85rem; color: var(--text-faint); margin-right: 2px; }
     .chip-btn {
       border: 1px solid var(--border);
       background: var(--surface);
       color: var(--text-muted);
       font-size: 0.85rem; font-weight: 600;
-      padding: 7px 14px; border-radius: var(--radius-pill);
-      cursor: pointer;
-      transition: all 0.18s var(--ease);
+      padding: 5px 13px; border-radius: var(--radius-pill);
+      cursor: pointer; text-decoration: none;
+      transition: color 0.18s var(--ease), border-color 0.18s var(--ease), background 0.18s var(--ease);
       white-space: nowrap;
     }
     .chip-btn:hover { color: var(--text); border-color: var(--border-strong); }
-    .chip-btn[aria-pressed="true"] {
-      background: var(--accent); border-color: var(--accent); color: var(--accent-fg);
-      box-shadow: 0 6px 16px -6px color-mix(in srgb, var(--accent) 60%, transparent);
+
+    .hero-stats {
+      display: flex; flex-wrap: wrap; gap: 6px 22px;
+      margin: 34px 0 0; padding: 0; list-style: none;
+      color: var(--text-muted); font-size: 0.92rem;
     }
-    .cat-btn[aria-pressed="true"] {
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      border-color: transparent;
+    .hero-stats b { color: var(--text); font-weight: 750; font-size: 1.05rem; margin-right: 4px; }
+
+    /* Mosaic: one tile per course */
+    .mosaic {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      gap: 10px;
+      margin: 0; padding: 0; list-style: none;
+    }
+    .mosaic li { position: relative; aspect-ratio: 1; }
+    .mosaic .tile {
+      --s: 100%;
+      width: 100%; height: 100%;
+      border-radius: 26%;
+      text-decoration: none;
+      opacity: 0;
+      animation: pop 0.55s var(--ease) forwards;
+      animation-delay: calc(0.2s + var(--i) * 0.022s);
+      transition: transform 0.22s var(--ease), box-shadow 0.22s var(--ease);
+    }
+    .mosaic .tile svg { width: 50%; height: 50%; }
+    .mosaic .tile .mono { font-size: clamp(0.8rem, 1.6vw, 1.15rem); }
+    .mosaic a.tile:hover, .mosaic a.tile:focus-visible {
+      transform: translateY(-3px) scale(1.06);
+      box-shadow: 0 14px 26px -12px color-mix(in srgb, var(--theme) 80%, transparent);
+      z-index: 2;
+    }
+    /* hover label */
+    .mosaic a.tile::after {
+      content: attr(data-label);
+      position: absolute; left: 50%; bottom: calc(100% + 8px);
+      transform: translate(-50%, 4px);
+      padding: 5px 10px; border-radius: 8px;
+      background: var(--text); color: var(--bg);
+      font-size: 0.78rem; font-weight: 650; white-space: nowrap;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.15s var(--ease), transform 0.15s var(--ease);
+    }
+    .mosaic a.tile:hover::after, .mosaic a.tile:focus-visible::after { opacity: 1; transform: translate(-50%, 0); }
+    .mosaic .tile-more {
+      background: none;
+      border: 1.5px dashed var(--border-strong);
+      color: var(--text-faint);
+      box-shadow: none;
+      font-size: 1.4rem; font-weight: 400;
+    }
+    @keyframes pop {
+      from { opacity: 0; transform: scale(0.6) rotate(-6deg); }
+      to { opacity: 1; transform: none; }
     }
 
-    .results-bar {
-      display: flex; align-items: center; justify-content: space-between;
-      gap: 12px; flex-wrap: wrap; margin-bottom: 22px;
+    @media (max-width: 960px) {
+      .hero { padding: 40px 0 56px; }
+      .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+      .mosaic { max-width: 560px; gap: 8px; }
     }
-    .results-count { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; }
-    .results-count b { color: var(--text); font-weight: 750; }
-    .clear-all {
-      background: none; border: none; cursor: pointer;
-      color: var(--accent); font-weight: 650; font-size: 0.88rem;
-      display: inline-flex; align-items: center; gap: 5px;
-    }
-    .clear-all:hover { text-decoration: underline; }
-    .clear-all[hidden] { display: none; }
+    @media (max-width: 420px) { .mosaic { gap: 6px; } .mosaic a.tile::after { display: none; } }
 
     /* ============================================================
-       EMPTY STATE
+       SECTIONS
        ============================================================ */
+    .section { padding: 56px 0 8px; }
+    .section-head { margin-bottom: 28px; max-width: 640px; }
+    .kicker {
+      margin: 0;
+      font-size: 0.78rem; font-weight: 700; letter-spacing: 0.09em;
+      text-transform: uppercase; color: var(--text-muted);
+    }
+    .section-head h2 {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: clamp(1.8rem, 3.6vw, 2.6rem);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin: 8px 0 10px;
+      text-wrap: balance;
+    }
+    .section-head p:not(.kicker) { color: var(--text-muted); margin: 0; }
+
+    /* ============================================================
+       COURSE CARD (compact)
+       ============================================================ */
+    .card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      padding: 18px 18px 16px;
+      min-height: 236px;
+      text-decoration: none;
+      color: inherit;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      transition: transform 0.25s var(--ease), border-color 0.25s var(--ease), box-shadow 0.25s var(--ease);
+    }
+    a.card:hover, a.card:focus-visible {
+      transform: translateY(-4px);
+      border-color: color-mix(in srgb, var(--theme) 55%, var(--border-strong));
+      box-shadow: var(--shadow), 0 18px 36px -24px color-mix(in srgb, var(--theme) 70%, transparent);
+    }
+    .card.is-soon { opacity: 0.75; }
+    .card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+    .badge {
+      font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.03em;
+      padding: 3px 9px; border-radius: var(--radius-pill);
+      border: 1px solid var(--border);
+      background: var(--chip-bg);
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+    .card h3 { font-size: 1.1rem; font-weight: 720; letter-spacing: -0.015em; line-height: 1.3; margin: 16px 0 6px; }
+    .card .desc {
+      color: var(--text-muted); font-size: 0.88rem; line-height: 1.5;
+      margin: 0 0 14px; flex: 1;
+      display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+    }
+    .card-meta {
+      display: flex; align-items: center; gap: 6px 12px; flex-wrap: wrap;
+      padding-top: 12px; border-top: 1px solid var(--border);
+      font-size: 0.8rem; color: var(--text-muted);
+    }
+    .lvl { display: inline-flex; align-items: center; gap: 6px; font-weight: 650; color: var(--text); }
+    .lvl::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+    .lvl-Beginner { color: var(--lvl-beginner); }
+    .lvl-Intermediate { color: var(--lvl-intermediate); }
+    .lvl-Advanced { color: var(--lvl-advanced); }
+    .card-meta .go {
+      margin-left: auto; display: grid; place-items: center;
+      color: var(--text-faint);
+      transition: color 0.2s var(--ease), transform 0.2s var(--ease);
+    }
+    .card-meta .go svg { width: 16px; height: 16px; }
+    a.card:hover .go { color: var(--text); transform: translate(2px, -2px); }
+
+    /* ============================================================
+       SEARCH RESULTS
+       ============================================================ */
+    .results { padding-top: 8px; }
+    .results[hidden] { display: none; }
+    .results-head {
+      display: flex; align-items: baseline; justify-content: space-between;
+      gap: 12px; flex-wrap: wrap;
+      padding-top: 24px; margin-bottom: 22px;
+      border-top: 1px solid var(--border);
+    }
+    .results-title { margin: 0; font-size: 1.05rem; font-weight: 600; color: var(--text-muted); }
+    .results-title b { color: var(--text); }
+    .link-btn {
+      background: none; border: none; cursor: pointer; padding: 4px 2px;
+      color: var(--text); font-weight: 650; font-size: 0.9rem;
+      text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--border-strong);
+    }
+    .link-btn:hover { text-decoration-color: currentColor; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 16px;
+    }
     .empty {
-      text-align: center; padding: 70px 20px;
+      text-align: center; padding: 56px 20px;
       border: 1px dashed var(--border-strong);
+      border-radius: var(--radius);
+    }
+    .empty[hidden] { display: none; }
+    .empty h3 { margin: 0 0 6px; font-family: var(--font-display); font-weight: 600; font-size: 1.5rem; }
+    .empty p { color: var(--text-muted); margin: 0 0 18px; }
+    .empty .suggest { justify-content: center; }
+
+    /* hide the browsing sections while a search is showing */
+    body.is-searching #paths, body.is-searching #catalog { display: none; }
+
+    /* ============================================================
+       LEARNING PATHS
+       ============================================================ */
+    .paths {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+    @media (max-width: 980px) { .paths { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 640px) { .paths { grid-template-columns: 1fr; } }
+    .path {
+      display: flex; flex-direction: column;
+      padding: 22px;
+      border: 1px solid var(--border);
       border-radius: var(--radius);
       background: var(--surface);
     }
-    .empty[hidden] { display: none; }
-    .empty .emoji {
-      width: 68px; height: 68px; margin: 0 auto 18px;
-      display: grid; place-items: center;
-      border-radius: 18px; background: var(--chip-bg);
-      color: var(--text-faint);
+    .path-chain {
+      display: flex; align-items: center;
+      margin: 0 0 18px; padding: 0; list-style: none;
     }
-    .empty .emoji svg { width: 32px; height: 32px; }
-    .empty h3 { margin: 0 0 6px; font-size: 1.3rem; }
-    .empty p { color: var(--text-muted); margin: 0 0 22px; }
+    .path-chain li { display: flex; align-items: center; }
+    .path-chain li + li::before {
+      content: "";
+      width: 16px; height: 2px; margin: 0 4px;
+      border-radius: 2px;
+      background: var(--border-strong);
+    }
+    .path-chain .tile { --s: 40px; }
+    .path h3 { margin: 0 0 4px; font-size: 1.12rem; font-weight: 720; letter-spacing: -0.015em; }
+    .path > p { margin: 0 0 16px; color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; }
+    .path-steps {
+      margin: 0 0 16px; padding: 0; list-style: none;
+      counter-reset: step;
+      display: grid; gap: 2px; align-content: start; flex: 1;
+    }
+    .path-steps a {
+      display: flex; align-items: center; gap: 10px;
+      padding: 6px 8px; margin: 0 -8px;
+      border-radius: 8px;
+      text-decoration: none; font-size: 0.9rem; font-weight: 600;
+      transition: background 0.15s var(--ease);
+    }
+    .path-steps a::before {
+      counter-increment: step;
+      content: counter(step);
+      width: 20px; height: 20px; flex: none;
+      display: grid; place-items: center;
+      border-radius: 50%;
+      font-size: 0.7rem; font-weight: 750;
+      background: color-mix(in srgb, var(--theme) 20%, transparent);
+      color: color-mix(in srgb, var(--theme) 70%, var(--text));
+    }
+    .path-steps a:hover { background: var(--chip-bg); }
+    .path-steps .meta { margin-left: auto; font-size: 0.78rem; font-weight: 500; color: var(--text-faint); }
+    .path-foot {
+      padding-top: 12px; border-top: 1px solid var(--border);
+      font-size: 0.82rem; color: var(--text-muted);
+    }
+
+    /* ============================================================
+       LIBRARY SHELVES
+       ============================================================ */
+    .shelf-nav {
+      position: sticky; top: var(--header-h); z-index: 40;
+      background: color-mix(in srgb, var(--bg) 88%, transparent);
+      backdrop-filter: saturate(150%) blur(14px);
+      -webkit-backdrop-filter: saturate(150%) blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+    .shelf-nav-inner {
+      display: flex; gap: 8px;
+      padding: 10px 0;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .shelf-nav-inner::-webkit-scrollbar { display: none; }
+    .shelf-nav .chip-btn { display: inline-flex; align-items: center; gap: 7px; }
+    .shelf-nav .chip-btn .n { font-weight: 600; color: var(--text-faint); font-size: 0.78rem; }
+    .shelf-nav .chip-btn[aria-current="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-fg); }
+    .shelf-nav .chip-btn[aria-current="true"] .n { color: inherit; opacity: 0.7; }
+
+    .shelf { padding-top: 40px; scroll-margin-top: calc(var(--header-h) + 64px); }
+    .shelf-head {
+      display: flex; align-items: flex-end; justify-content: space-between;
+      gap: 16px; margin-bottom: 16px;
+    }
+    .shelf-head h3 {
+      margin: 0;
+      font-family: var(--font-display); font-weight: 600;
+      font-size: clamp(1.35rem, 2.4vw, 1.7rem); letter-spacing: -0.015em; line-height: 1.2;
+    }
+    .shelf-head p { margin: 4px 0 0; color: var(--text-muted); font-size: 0.92rem; }
+    .shelf-arrows { display: flex; gap: 8px; flex: none; }
+    .shelf-arrows[hidden] { display: none; }
+    .shelf-arrows .icon-btn:disabled { opacity: 0.35; cursor: default; }
+    .shelf-arrows .icon-btn:disabled:hover { color: var(--text-muted); border-color: var(--border); background: var(--surface); }
+    @media (hover: none) { .shelf-arrows { display: none; } }
+
+    .shelf-row {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: 272px;
+      gap: 16px;
+      margin: 0 calc(var(--gutter) * -1);
+      padding: 6px var(--gutter) 18px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-padding-inline: var(--gutter);
+      scrollbar-width: thin;
+      scrollbar-color: var(--border-strong) transparent;
+      list-style: none;
+    }
+    .shelf-row > * { scroll-snap-align: start; }
+    /* fade the edge that has more cards behind it */
+    .shelf-row.more-right { -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 56px), transparent); mask-image: linear-gradient(90deg, #000 calc(100% - 56px), transparent); }
+    .shelf-row.more-left { -webkit-mask-image: linear-gradient(90deg, transparent, #000 56px); mask-image: linear-gradient(90deg, transparent, #000 56px); }
+    .shelf-row.more-left.more-right { -webkit-mask-image: linear-gradient(90deg, transparent, #000 56px, #000 calc(100% - 56px), transparent); mask-image: linear-gradient(90deg, transparent, #000 56px, #000 calc(100% - 56px), transparent); }
+    @media (max-width: 560px) { .shelf-row { grid-auto-columns: 78%; } }
 
     /* ============================================================
        FOOTER
        ============================================================ */
     footer.site-footer {
-      margin-top: 90px;
+      margin-top: 80px;
       border-top: 1px solid var(--border);
-      padding: 44px 0;
+      padding: 40px 0;
     }
     .footer-inner {
       display: flex; align-items: center; justify-content: space-between;
-      gap: 20px; flex-wrap: wrap;
+      gap: 16px 24px; flex-wrap: wrap;
     }
     .footer-inner .brand { font-size: 0.98rem; }
-    .footer-note { color: var(--text-faint); font-size: 0.88rem; }
-    .footer-note .heart { color: #fb7185; }
+    .footer-note { margin: 0; color: var(--text-muted); font-size: 0.88rem; }
+    .footer-note a { text-underline-offset: 3px; }
 
     /* ============================================================
        ENTRANCE ANIMATION
        ============================================================ */
     @keyframes rise {
-      from { opacity: 0; transform: translateY(18px); }
+      from { opacity: 0; transform: translateY(14px); }
       to { opacity: 1; transform: translateY(0); }
     }
     .reveal { opacity: 0; animation: rise 0.6s var(--ease) forwards; }
@@ -704,31 +775,22 @@
       html { scroll-behavior: auto; }
       *, *::before, *::after {
         animation-duration: 0.001ms !important;
+        animation-delay: 0s !important;
         animation-iteration-count: 1 !important;
         transition-duration: 0.001ms !important;
       }
-      .reveal { opacity: 1; }
+      .reveal, .mosaic .tile { opacity: 1; }
     }
   </style>
 </head>
 <body>
   <a class="skip-link" href="#catalog">Skip to courses</a>
 
-  <div class="bg-decor" aria-hidden="true">
-    <span class="blob b1"></span>
-    <span class="blob b2"></span>
-    <span class="blob b3"></span>
-  </div>
-
   <!-- ===================== HEADER ===================== -->
   <header class="site-header" id="siteHeader">
     <div class="container header-inner">
       <a class="brand" href="#top" aria-label="Learning Portal home">
-        <span class="brand-mark" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
-          </svg>
-        </span>
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
         Learning Portal
       </a>
       <div class="header-actions">
@@ -750,87 +812,73 @@
   <main>
     <!-- ===================== HERO ===================== -->
     <section class="hero">
-      <div class="container">
-        <span class="hero-badge reveal">
-          <span class="dot" aria-hidden="true">✦</span>
-          Practical, production-ready courses
-        </span>
-        <h1 class="reveal" style="animation-delay:.05s">
-          Master <span class="grad">Modern Web</span> Development
-        </h1>
-        <p class="lead reveal" style="animation-delay:.1s">
-          Structured courses for developers who want practical, production-ready skills —
-          hands-on lessons, quizzes, and progress tracking, all in one place.
-        </p>
-        <div class="hero-cta reveal" style="animation-delay:.15s">
-          <a class="btn btn-primary" href="#catalog">
-            Browse Courses
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </a>
-          <a class="btn btn-ghost" href="#featured">Start Learning</a>
-        </div>
-
-        <div class="stats reveal" id="stats" style="animation-delay:.2s" aria-label="Portal statistics"></div>
-      </div>
-    </section>
-
-    <!-- ===================== FEATURED ===================== -->
-    <section class="block" id="featured">
-      <div class="container">
-        <div class="section-head">
-          <span class="kicker">Featured</span>
-          <h2>Start with our flagship courses</h2>
-          <p>Hand-picked paths that take you from fundamentals to shipping real, production-ready apps.</p>
-        </div>
-        <div class="featured-grid" id="featuredGrid"></div>
-      </div>
-    </section>
-
-    <!-- ===================== CATALOG ===================== -->
-    <section class="block" id="catalog">
-      <div class="container">
-        <div class="section-head">
-          <span class="kicker">All Courses</span>
-          <h2>Browse the catalog</h2>
-          <p>Search, filter by category, or combine tags to find exactly what you want to learn next.</p>
-        </div>
-
-        <div class="controls">
-          <div class="search-wrap">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
-            <input id="search" type="search" placeholder="Search courses, tags, or technologies…" autocomplete="off" aria-label="Search courses" />
+      <div class="container hero-inner">
+        <div class="hero-copy">
+          <p class="eyebrow reveal">Self-paced courses · No account needed</p>
+          <h1 class="reveal" style="animation-delay:.05s">What do you want to <em>learn</em> today?</h1>
+          <p class="lead reveal" style="animation-delay:.1s">
+            Courses on everything from Python and SQL to cloud, security and AI. Each one is
+            broken into lessons with quizzes, so you can learn a little at a time and start right now.
+          </p>
+          <form class="search reveal" id="searchForm" role="search" style="animation-delay:.15s">
+            <label class="sr-only" for="search">Search courses</label>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+            <input id="search" type="search" placeholder="Try “Python”, “cloud” or “machine learning”" autocomplete="off" enterkeyhint="search" />
+            <kbd class="search-kbd" aria-hidden="true">/</kbd>
             <button class="search-clear" id="searchClear" type="button" aria-label="Clear search">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
             </button>
+          </form>
+          <div class="suggest reveal" id="suggest" style="animation-delay:.2s">
+            <span class="suggest-label">Popular:</span>
           </div>
-
-          <div class="filter-row" id="categoryRow" role="group" aria-label="Filter by category">
-            <span class="filter-label">Category</span>
-          </div>
-          <div class="filter-row" id="tagRow" role="group" aria-label="Filter by tag">
-            <span class="filter-label">Tags</span>
-          </div>
+          <ul class="hero-stats reveal" id="heroStats" style="animation-delay:.25s" aria-label="Portal statistics"></ul>
         </div>
+        <ul class="mosaic" id="mosaic" aria-label="All courses"></ul>
+      </div>
+    </section>
 
-        <div class="results-bar">
-          <span class="results-count" id="resultsCount" aria-live="polite"></span>
-          <button class="clear-all" id="clearAll" type="button" hidden>
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
-            Clear all filters
-          </button>
+    <!-- ===================== SEARCH RESULTS (shown while searching) ===================== -->
+    <section class="section results" id="results" hidden aria-labelledby="resultsTitle">
+      <div class="container">
+        <div class="results-head">
+          <h2 class="results-title" id="resultsTitle" aria-live="polite"></h2>
+          <button class="link-btn" id="clearSearch" type="button">Clear search</button>
         </div>
-
-        <div class="grid" id="courseGrid"></div>
-
+        <div class="grid" id="resultsGrid"></div>
         <div class="empty" id="emptyState" hidden>
-          <div class="emoji" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/><path d="M8 11h6"/></svg>
-          </div>
-          <h3>No courses found</h3>
-          <p>Try a different search term or clear your filters to see everything.</p>
-          <button class="btn btn-primary" id="emptyClear" type="button" style="height:46px">Clear filters</button>
+          <h3>Nothing matches that yet</h3>
+          <p>Try a broader word, or start from one of these:</p>
+          <div class="suggest" id="emptySuggest"></div>
         </div>
       </div>
+    </section>
+
+    <!-- ===================== LEARNING PATHS ===================== -->
+    <section class="section" id="paths" aria-labelledby="pathsTitle">
+      <div class="container">
+        <div class="section-head">
+          <p class="kicker">Learning paths</p>
+          <h2 id="pathsTitle">Not sure where to start? Follow a path.</h2>
+          <p>Each path puts a few courses in an order where every step builds on the last.</p>
+        </div>
+        <div class="paths" id="pathsGrid"></div>
+      </div>
+    </section>
+
+    <!-- ===================== LIBRARY ===================== -->
+    <section class="section" id="catalog" aria-labelledby="catalogTitle">
+      <div class="container">
+        <div class="section-head">
+          <p class="kicker">The library</p>
+          <h2 id="catalogTitle">Browse every course</h2>
+          <p id="catalogLead"></p>
+        </div>
+      </div>
+      <nav class="shelf-nav" aria-label="Jump to a subject">
+        <div class="container"><div class="shelf-nav-inner" id="shelfNav"></div></div>
+      </nav>
+      <div class="container" id="shelves"></div>
     </section>
   </main>
 
@@ -838,13 +886,12 @@
   <footer class="site-footer">
     <div class="container footer-inner">
       <a class="brand" href="#top">
-        <span class="brand-mark" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-        </span>
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
         Learning Portal
       </a>
       <p class="footer-note">
-        Built with <span class="heart">♥</span> for self-paced learning · More courses coming soon
+        Self-paced courses for curious people · More on the way ·
+        <a href="https://github.com/ThachThanhThien" target="_blank" rel="noopener">GitHub</a>
       </p>
     </div>
   </footer>
@@ -853,9 +900,7 @@
   <dialog class="signin" id="signInDialog" aria-labelledby="signInTitle" aria-describedby="signInDesc">
     <div class="signin-body">
       <div class="signin-top">
-        <span class="brand-mark" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
-        </span>
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
         <button class="icon-btn" id="signInClose" type="button" aria-label="Close">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>
         </button>
@@ -894,6 +939,7 @@
      * @property {boolean}  [isNew]
      * @property {boolean}  [isComingSoon]
      * @property {boolean}  [isFeatured]
+     * @property {'bites'|'course'} [format]  Lesson style; defaults to 'bites' when topics >= 100.
      */
 
     /** @type {Course[]} */
@@ -1506,198 +1552,279 @@
       ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
     const isLive = (c) => !c.isComingSoon && !!c.url;
+    /** Bite-sized courses: many five-minute lessons. Set `format` on a course to override. */
+    const isBites = (c) => (c.format ? c.format === 'bites' : (c.topics || 0) >= 100);
+    const byId = new Map(COURSES.map((c) => [c.id, c]));
 
-    /* -------------------- state -------------------- */
-    const state = { search: '', category: 'All', tags: new Set() };
+    /* ============================================================
+       SHELVES — how the library groups categories. A course whose
+       category is not listed here still shows, on a "More courses" shelf.
+       ============================================================ */
+    const SHELVES = [
+      { id: 'web', title: 'Web & apps', blurb: 'Build the interfaces people use every day.', categories: ['Frontend'] },
+      { id: 'foundations', title: 'Programming foundations', blurb: 'Languages, algorithms and the habits behind good code.', categories: ['Language', 'Computer Science', 'Version Control', 'Testing'] },
+      { id: 'backend', title: 'Backend & architecture', blurb: 'Servers, messaging, and how large systems fit together.', categories: ['Backend', 'Architecture', 'Software Design'] },
+      { id: 'data', title: 'Data', blurb: 'Store it, query it, and find out what it means.', categories: ['Database', 'Data Science'] },
+      { id: 'infra', title: 'Cloud, DevOps & security', blurb: 'Run software reliably, at scale, and keep it safe.', categories: ['Cloud', 'DevOps', 'Systems', 'Security'] },
+      { id: 'ai', title: 'Artificial intelligence', blurb: 'Work with language models and build on top of them.', categories: ['AI'] },
+    ];
 
-    /* -------------------- card renderer -------------------- */
-    function courseCard(course, featured = false) {
-      const live = isLive(course);
+    /* ============================================================
+       LEARNING PATHS — ordered course ids. Unknown ids are skipped.
+       ============================================================ */
+    const PATHS = [
+      { title: 'Start coding', blurb: 'Write your first programs, then pick up the habits working developers rely on.', steps: ['python', 'git-github', 'algorithms', 'testing'] },
+      { title: 'Build for the web', blurb: 'Go from typed JavaScript to fast, production-ready React apps.', steps: ['typescript', 'react', 'nextjs', 'web-performance'] },
+      { title: 'Work with data', blurb: 'Ask questions in SQL, then answer bigger ones with Python and data science.', steps: ['sql', 'postgresql', 'python', 'data-science'] },
+      { title: 'Ship to the cloud', blurb: 'Package, deploy and automate software on real infrastructure.', steps: ['linux', 'docker', 'kubernetes', 'ci-cd', 'aws'] },
+      { title: 'Think like an architect', blurb: 'Design code and systems that stay easy to change as they grow.', steps: ['design-patterns', 'clean-architecture', 'system-design'] },
+      { title: 'Build with AI', blurb: 'Learn to prompt well, understand the models, then build agents.', steps: ['prompt-engineering', 'claude', 'ai-agents'] },
+    ];
+
+    /* Quick searches offered under the search box. */
+    const SUGGESTIONS = ['Python', 'AI', 'Cloud', 'Database', 'Security', 'React'];
+
+    /* -------------------- shared pieces -------------------- */
+    const ARROW = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>`;
+    const linkAttrs = (c) => `href="${esc(c.url)}" target="_blank" rel="noopener"`;
+    const tileInner = (c) => LOGOS[c.id] || `<span class="mono">${esc(c.icon || c.title[0])}</span>`;
+    const tile = (c) => `<span class="tile" style="--theme:${esc(c.themeColor)}" aria-hidden="true">${tileInner(c)}</span>`;
+    const lessons = (c) => (c.topics ? `${c.topics} lessons` : '');
+    const hours = (c) => (c.estimatedHours ? `${c.estimatedHours} h` : '');
+    const fmt = (n) => n.toLocaleString('en-US');
+
+    function shelfFor(course) {
+      return SHELVES.find((s) => s.categories.includes(course.category));
+    }
+
+    /* -------------------- course card -------------------- */
+    function courseCard(c) {
+      const live = isLive(c);
       const tag = live ? 'a' : 'article';
-      const attrs = live
-        ? `href="${esc(course.url)}" target="_blank" rel="noopener"`
-        : `aria-disabled="true"`;
-      const mono = esc(course.icon || course.title[0]);
-      const coverMark = LOGOS[course.id]
-        ? `<span class="logo" aria-hidden="true">${LOGOS[course.id]}</span>`
-        : `<span class="mono" aria-hidden="true">${mono}</span>`;
-      const badges = [
-        course.isNew ? `<span class="pill pill-new">New</span>` : '',
-        course.isComingSoon ? `<span class="pill pill-soon">Coming soon</span>` : '',
-      ].join('');
-      const chips = course.technologies.map((t) => `<span class="chip">${esc(t)}</span>`).join('');
-      const hours = course.estimatedHours ? `${course.estimatedHours}h` : '';
-      const topics = course.topics ? `${course.topics} topics` : '';
-      const meta = [hours, topics].filter(Boolean).join(' · ');
-      const goLabel = live
-        ? `<span class="go">Open course <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>`
-        : `<span class="go go-soon">In progress</span>`;
-
+      const badge = c.isComingSoon
+        ? '<span class="badge">Coming soon</span>'
+        : isBites(c) ? '<span class="badge">5-minute bites</span>' : '';
+      const meta = [lessons(c), hours(c)].filter(Boolean).map((m) => `<span>${esc(m)}</span>`).join('');
       return `
-        <${tag} class="card${featured ? ' featured' : ''}${live ? '' : ' is-soon'}"
-                style="--theme:${esc(course.themeColor)}" ${attrs}
-                aria-label="${esc(course.title)}${live ? '' : ' (coming soon)'}">
-          <div class="cover">
-            ${coverMark}
-            <div class="cover-badges">${badges}</div>
-          </div>
-          <div class="card-body">
-            <div class="card-meta">
-              <span class="cat">${esc(course.category)}</span>
-              <span class="diff diff-${esc(course.difficulty)}">${esc(course.difficulty)}</span>
-            </div>
-            <h3>${esc(course.title)}</h3>
-            <p class="desc">${esc(course.description)}</p>
-            <div class="tech">${chips}</div>
-            <div class="card-foot">
-              <span class="info">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
-                ${esc(meta)}
-              </span>
-              ${goLabel}
-            </div>
+        <${tag} class="card${live ? '' : ' is-soon'}" style="--theme:${esc(c.themeColor)}"
+          ${live ? linkAttrs(c) : 'aria-disabled="true"'}
+          aria-label="${esc(c.title)}${live ? ', opens in a new tab' : ' (coming soon)'}">
+          <div class="card-top">${tile(c)}${badge}</div>
+          <h3>${esc(c.title)}</h3>
+          <p class="desc">${esc(c.description)}</p>
+          <div class="card-meta">
+            <span class="lvl lvl-${esc(c.difficulty)}">${esc(c.difficulty)}</span>
+            ${meta}
+            ${live ? `<span class="go">${ARROW}</span>` : ''}
           </div>
         </${tag}>`;
     }
 
-    /* -------------------- stats (computed from data) -------------------- */
-    function renderStats() {
-      const techs = new Set();
-      let hours = 0, topics = 0;
-      COURSES.forEach((c) => {
-        c.technologies.forEach((t) => techs.add(t));
-        hours += c.estimatedHours || 0;
-        topics += c.topics || 0;
+    /* -------------------- hero -------------------- */
+    function renderHero() {
+      const lessonsTotal = COURSES.reduce((n, c) => n + (c.topics || 0), 0);
+      const subjects = new Set(COURSES.map((c) => c.category)).size;
+      $('#heroStats').innerHTML = [
+        [COURSES.length, 'courses'],
+        [lessonsTotal, 'lessons'],
+        [subjects, 'subjects'],
+      ].map(([n, label]) => `<li><b>${fmt(n)}</b>${label}</li>`).join('');
+
+      const tiles = COURSES.map((c, i) => {
+        const inner = tileInner(c);
+        return isLive(c)
+          ? `<li><a class="tile" style="--theme:${esc(c.themeColor)};--i:${i}" ${linkAttrs(c)} data-label="${esc(c.title)}" aria-label="${esc(c.title)}, opens in a new tab">${inner}</a></li>`
+          : `<li><span class="tile" style="--theme:${esc(c.themeColor)};--i:${i}" title="${esc(c.title)} (coming soon)">${inner}</span></li>`;
       });
-      const items = [
-        { num: COURSES.length, label: 'Courses' },
-        { num: topics, label: 'Topics' },
-        { num: hours, label: 'Learning hours' },
-        { num: techs.size, label: 'Technologies' },
-      ];
-      $('#stats').innerHTML = items.map((s) =>
-        `<div class="stat"><div class="num" data-count="${s.num}">0</div><div class="label">${s.label}</div></div>`
+      // pad the last row with "more on the way" tiles
+      const cols = 7;
+      const pad = (cols - (COURSES.length % cols)) % cols || 0;
+      for (let k = 0; k < pad; k++) {
+        tiles.push(`<li aria-hidden="true"><span class="tile tile-more" style="--i:${COURSES.length + k}">${k === 0 ? '+' : ''}</span></li>`);
+      }
+      $('#mosaic').innerHTML = tiles.join('');
+      $('#mosaic').setAttribute('aria-label', `All ${COURSES.length} courses`);
+
+      const chips = SUGGESTIONS.map((s) => `<button class="chip-btn" type="button" data-q="${esc(s)}">${esc(s)}</button>`).join('');
+      $('#suggest').insertAdjacentHTML('beforeend', chips);
+      $('#emptySuggest').innerHTML = chips;
+    }
+
+    /* -------------------- learning paths -------------------- */
+    function renderPaths() {
+      $('#pathsGrid').innerHTML = PATHS.map((p) => {
+        const steps = p.steps.map((id) => byId.get(id)).filter(Boolean);
+        if (!steps.length) return '';
+        const total = steps.reduce((n, c) => n + (c.estimatedHours || 0), 0);
+        const chain = steps.map((c) => `<li>${tile(c)}</li>`).join('');
+        const list = steps.map((c) => `
+          <li><a ${isLive(c) ? linkAttrs(c) : ''} style="--theme:${esc(c.themeColor)}">
+            ${esc(c.title)}<span class="meta">${esc(c.difficulty)}</span>
+          </a></li>`).join('');
+        return `
+          <article class="path">
+            <ol class="path-chain" aria-hidden="true">${chain}</ol>
+            <h3>${esc(p.title)}</h3>
+            <p>${esc(p.blurb)}</p>
+            <ol class="path-steps" aria-label="${esc(p.title)}: courses in order">${list}</ol>
+            <div class="path-foot">${steps.length} courses${total ? ` · about ${fmt(total)} hours` : ''}</div>
+          </article>`;
+      }).join('');
+    }
+
+    /* -------------------- library shelves -------------------- */
+    function renderShelves() {
+      const groups = SHELVES.map((s) => ({ ...s, courses: COURSES.filter((c) => s.categories.includes(c.category)) }));
+      const rest = COURSES.filter((c) => !shelfFor(c));
+      if (rest.length) groups.push({ id: 'more', title: 'More courses', blurb: '', courses: rest });
+      const shown = groups.filter((g) => g.courses.length);
+
+      $('#catalogLead').textContent =
+        `All ${COURSES.length} courses, grouped into ${shown.length} shelves. Jump to a subject or scroll through.`;
+
+      $('#shelfNav').innerHTML = shown.map((g) =>
+        `<a class="chip-btn" href="#shelf-${g.id}" data-shelf="${g.id}">${esc(g.title)}<span class="n">${g.courses.length}</span></a>`
       ).join('');
-      countUp();
-    }
 
-    function countUp() {
-      const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-      $$('.stat .num').forEach((el) => {
-        const target = +el.dataset.count;
-        if (reduce) { el.textContent = target; return; }
-        const dur = 1100, start = performance.now();
-        const tick = (now) => {
-          const p = Math.min((now - start) / dur, 1);
-          const eased = 1 - Math.pow(1 - p, 3);
-          el.textContent = Math.round(target * eased);
-          if (p < 1) requestAnimationFrame(tick);
+      $('#shelves').innerHTML = shown.map((g) => `
+        <section class="shelf" id="shelf-${g.id}" aria-labelledby="shelf-${g.id}-title">
+          <div class="shelf-head">
+            <div>
+              <h3 id="shelf-${g.id}-title">${esc(g.title)}</h3>
+              ${g.blurb ? `<p>${esc(g.blurb)}</p>` : ''}
+            </div>
+            <div class="shelf-arrows" hidden>
+              <button class="icon-btn" type="button" data-dir="-1" aria-label="Scroll ${esc(g.title)} left">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+              </button>
+              <button class="icon-btn" type="button" data-dir="1" aria-label="Scroll ${esc(g.title)} right">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+              </button>
+            </div>
+          </div>
+          <div class="shelf-row">${g.courses.map(courseCard).join('')}</div>
+        </section>`).join('');
+
+      // arrows: only when a row overflows; disabled at either end
+      $$('.shelf').forEach((shelf) => {
+        const row = $('.shelf-row', shelf);
+        const arrows = $('.shelf-arrows', shelf);
+        const [prev, next] = $$('button', arrows);
+        const update = () => {
+          const max = row.scrollWidth - row.clientWidth;
+          arrows.hidden = max < 4;
+          prev.disabled = row.scrollLeft < 4;
+          next.disabled = row.scrollLeft > max - 4;
+          row.classList.toggle('more-left', max >= 4 && !prev.disabled);
+          row.classList.toggle('more-right', max >= 4 && !next.disabled);
         };
-        requestAnimationFrame(tick);
-      });
-    }
-
-    /* -------------------- featured -------------------- */
-    function renderFeatured() {
-      const featured = COURSES.filter((c) => c.isFeatured);
-      const wrap = $('#featured');
-      if (!featured.length) { wrap.style.display = 'none'; return; }
-      $('#featuredGrid').innerHTML = featured.map((c) => courseCard(c, true)).join('');
-    }
-
-    /* -------------------- filters -------------------- */
-    function buildFilters() {
-      const cats = ['All', ...new Set(COURSES.map((c) => c.category))];
-      $('#categoryRow').insertAdjacentHTML('beforeend', cats.map((cat) =>
-        `<button class="chip-btn cat-btn" type="button" data-cat="${esc(cat)}" aria-pressed="${cat === 'All'}">${esc(cat)}</button>`
-      ).join(''));
-
-      const tags = [...new Set(COURSES.flatMap((c) => c.tags))].sort((a, b) => a.localeCompare(b));
-      $('#tagRow').insertAdjacentHTML('beforeend', tags.map((t) =>
-        `<button class="chip-btn tag-btn" type="button" data-tag="${esc(t)}" aria-pressed="false">${esc(t)}</button>`
-      ).join(''));
-    }
-
-    function matches(course) {
-      const q = state.search.trim().toLowerCase();
-      if (q) {
-        const hay = [course.title, course.description, ...course.tags, ...course.technologies, course.category]
-          .join(' ').toLowerCase();
-        if (!hay.includes(q)) return false;
-      }
-      if (state.category !== 'All' && course.category !== state.category) return false;
-      if (state.tags.size) {
-        // OR across selected tags: course matches if it has at least one.
-        const has = course.tags.some((t) => state.tags.has(t));
-        if (!has) return false;
-      }
-      return true;
-    }
-
-    function applyFilters() {
-      const list = COURSES.filter(matches);
-      const grid = $('#courseGrid');
-      grid.innerHTML = list.map((c, i) => courseCard(c)).join('');
-      // stagger entrance
-      $$('.card', grid).forEach((el, i) => {
-        el.classList.add('reveal');
-        el.style.animationDelay = (i * 0.05) + 's';
+        arrows.addEventListener('click', (e) => {
+          const btn = e.target.closest('button'); if (!btn) return;
+          row.scrollBy({ left: +btn.dataset.dir * row.clientWidth * 0.85, behavior: 'smooth' });
+        });
+        row.addEventListener('scroll', update, { passive: true });
+        addEventListener('resize', update);
+        update();
       });
 
-      $('#emptyState').hidden = list.length !== 0;
-      grid.style.display = list.length ? '' : 'none';
-
-      const total = COURSES.length;
-      $('#resultsCount').innerHTML = list.length === total
-        ? `Showing all <b>${total}</b> courses`
-        : `Showing <b>${list.length}</b> of ${total} courses`;
-
-      const active = state.search || state.category !== 'All' || state.tags.size;
-      $('#clearAll').hidden = !active;
+      // highlight the shelf currently in view
+      if ('IntersectionObserver' in window) {
+        const nav = $('#shelfNav');
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach((en) => {
+            if (!en.isIntersecting) return;
+            const id = en.target.id.replace('shelf-', '');
+            $$('a', nav).forEach((a) => {
+              const on = a.dataset.shelf === id;
+              if (on) {
+                a.setAttribute('aria-current', 'true');
+                nav.scrollTo({ left: a.offsetLeft - nav.offsetLeft - 8, behavior: 'smooth' });
+              } else a.removeAttribute('aria-current');
+            });
+          });
+        }, { rootMargin: '-40% 0px -55% 0px' });
+        $$('.shelf').forEach((s) => io.observe(s));
+      }
     }
 
-    function clearFilters() {
-      state.search = '';
-      state.category = 'All';
-      state.tags.clear();
-      $('#search').value = '';
-      $('#searchClear').classList.remove('show');
-      $$('.cat-btn').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.cat === 'All')));
-      $$('.tag-btn').forEach((b) => b.setAttribute('aria-pressed', 'false'));
-      applyFilters();
+    /* -------------------- search -------------------- */
+    const reEsc = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    function matcher(query) {
+      // every word must match: short words (AI, Go, SQL) as whole words, so "ai" skips "maintainable";
+      // longer words anywhere, so "security" also finds "Cybersecurity"
+      const words = query.toLowerCase().split(/\s+/).filter(Boolean);
+      const res = words.map((w) => new RegExp(w.length <= 3 ? `(^|[^a-z0-9])${reEsc(w)}($|[^a-z0-9])` : reEsc(w)));
+      // returns a relevance score; 0 = no match
+      return (c) => {
+        const shelf = shelfFor(c);
+        const fields = [
+          [c.title, 8],
+          [`${c.category} ${shelf ? shelf.title : ''}`, 4],
+          [[...c.tags, ...c.technologies].join(' · '), 2],
+          [c.description, 1],
+        ].map(([text, weight]) => [text.toLowerCase(), weight]);
+        let score = 0;
+        for (const re of res) {
+          const hit = fields.filter(([text]) => re.test(text));
+          if (!hit.length) return 0;
+          score += Math.max(...hit.map(([, w]) => w));
+        }
+        return score;
+      };
+    }
+
+    function runSearch() {
+      const q = $('#search').value.trim();
+      $('#searchForm').classList.toggle('has-value', !!$('#search').value);
+      document.body.classList.toggle('is-searching', !!q);
+      $('#results').hidden = !q;
+      if (!q) return;
+
+      const score = matcher(q);
+      const list = COURSES.map((c, i) => ({ c, i, s: score(c) }))
+        .filter((r) => r.s > 0)
+        .sort((a, b) => b.s - a.s || a.i - b.i) // best match first, then catalog order
+        .map((r) => r.c);
+      $('#resultsGrid').innerHTML = list.map(courseCard).join('');
+      $('#resultsGrid').hidden = !list.length;
+      $('#emptyState').hidden = !!list.length;
+      $('#resultsTitle').innerHTML = list.length
+        ? `<b>${list.length}</b> ${list.length === 1 ? 'course matches' : 'courses match'} “${esc(q)}”`
+        : `No courses match “${esc(q)}”`;
+    }
+
+    function setSearch(value, { focus = false } = {}) {
+      const input = $('#search');
+      input.value = value;
+      runSearch();
+      if (focus) input.focus();
     }
 
     /* -------------------- events -------------------- */
     function wireEvents() {
-      const search = $('#search');
-      const clearBtn = $('#searchClear');
-      search.addEventListener('input', () => {
-        state.search = search.value;
-        clearBtn.classList.toggle('show', !!search.value);
-        applyFilters();
+      const input = $('#search');
+      input.addEventListener('input', runSearch);
+      input.addEventListener('keydown', (e) => { if (e.key === 'Escape' && input.value) { e.preventDefault(); setSearch(''); } });
+      $('#searchForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (input.value.trim()) $('#results').scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
-      clearBtn.addEventListener('click', () => {
-        search.value = ''; state.search = '';
-        clearBtn.classList.remove('show'); applyFilters(); search.focus();
-      });
-
-      $('#categoryRow').addEventListener('click', (e) => {
-        const btn = e.target.closest('.cat-btn'); if (!btn) return;
-        state.category = btn.dataset.cat;
-        $$('.cat-btn').forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
-        applyFilters();
+      $('#searchClear').addEventListener('click', () => setSearch('', { focus: true }));
+      $('#clearSearch').addEventListener('click', () => setSearch('', { focus: true }));
+      document.addEventListener('click', (e) => {
+        const chip = e.target.closest('[data-q]'); if (!chip) return;
+        setSearch(chip.dataset.q);
       });
 
-      $('#tagRow').addEventListener('click', (e) => {
-        const btn = e.target.closest('.tag-btn'); if (!btn) return;
-        const tag = btn.dataset.tag;
-        if (state.tags.has(tag)) state.tags.delete(tag); else state.tags.add(tag);
-        btn.setAttribute('aria-pressed', String(state.tags.has(tag)));
-        applyFilters();
+      // "/" focuses search (unless typing somewhere already)
+      document.addEventListener('keydown', (e) => {
+        if (e.key !== '/' || e.ctrlKey || e.metaKey || e.altKey) return;
+        const t = e.target;
+        if (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName)) return;
+        e.preventDefault();
+        input.focus();
+        input.select();
       });
-
-      $('#clearAll').addEventListener('click', clearFilters);
-      $('#emptyClear').addEventListener('click', clearFilters);
 
       // Theme toggle
       $('#themeToggle').addEventListener('click', () => {
@@ -1706,18 +1833,18 @@
         try { localStorage.setItem('lp-theme', next); } catch (e) {}
       });
 
-      // Header shadow on scroll
+      // Header border once scrolled
       const header = $('#siteHeader');
       const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 8);
       addEventListener('scroll', onScroll, { passive: true }); onScroll();
     }
 
     /* -------------------- init -------------------- */
-    renderStats();
-    renderFeatured();
-    buildFilters();
+    renderHero();
+    renderPaths();
+    renderShelves();
     wireEvents();
-    applyFilters();
+    if ($('#search').value) runSearch(); // browsers may restore a typed query on back/forward
   </script>
 
   <!-- ============================================================
